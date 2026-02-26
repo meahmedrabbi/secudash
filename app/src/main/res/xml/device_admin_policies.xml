@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Device admin policies granted to com.bfoxnet.dashboard.admin.DeviceAdminReceiver.
+    The FORCE_LOCK policy is requested so that the device admin component has a
+    meaningful policy capability (required to activate Device Admin on API 26+).
+-->
+<device-admin>
+    <uses-policies>
+        <force-lock />
+        <watch-login />
+        <reset-password />
+        <limit-password />
+        <wipe-data />
+    </uses-policies>
+</device-admin>

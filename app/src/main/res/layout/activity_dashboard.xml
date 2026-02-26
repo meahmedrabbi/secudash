@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Main dashboard layout. Contains a period-selection Spinner at the top and a
+    RecyclerView below that lists per-app usage statistics.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context=".DashboardActivity">
+
+    <!-- Toolbar / header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/dashboard_title"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_range_label"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="14sp"
+            android:layout_marginEnd="8dp" />
+
+        <Spinner
+            android:id="@+id/spinnerRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorOnPrimary"
+            android:popupTheme="@style/Theme.SecuDash" />
+
+    </LinearLayout>
+
+    <!-- Empty-state message -->
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.4"
+        android:padding="32dp"
+        android:text="@string/empty_state_message"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- Usage stats list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAppUsage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingVertical="4dp"
+        tools:listitem="@layout/item_app_usage" />
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SecuDash</string>
+
+    <!-- Permission screen -->
+    <string name="permissions_required_header">The following permissions are required before you can use SecuDash:</string>
+    <string name="perm_usage_stats">App Usage Access</string>
+    <string name="perm_usage_stats_rationale">SecuDash needs access to app usage data in order to display the usage dashboard. Please enable \"Permit usage access\" for SecuDash on the next screen.</string>
+    <string name="perm_device_admin">Device Administrator</string>
+    <string name="perm_accessibility">Accessibility Service</string>
+    <string name="perm_accessibility_rationale">SecuDash uses an Accessibility Service to prevent the app from being silently uninstalled or its protections removed. Please enable \"SecuDash Protection\" on the next screen.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="grant_permissions">Grant Permissions</string>
+
+    <!-- Device admin -->
+    <string name="admin_enabled">SecuDash Device Admin activated.</string>
+    <string name="admin_disable_blocked">SecuDash must remain a Device Administrator to protect this device. Deactivation is blocked.</string>
+    <string name="admin_activation_reason">SecuDash requires Device Administrator rights to prevent unauthorised uninstallation and to keep the usage-monitoring service active at all times.</string>
+
+    <!-- Accessibility service -->
+    <string name="accessibility_service_label">SecuDash Protection</string>
+    <string name="accessibility_service_description">Monitors Settings screens to prevent removal of SecuDash protections (Device Admin and Accessibility Service). No personal data is read or transmitted.</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">App Usage Dashboard</string>
+    <string name="empty_state_message">No usage data available.\nMake sure App Usage Access is granted.</string>
+    <string name="last_used_format">Last used: %1$s</string>
+    <string name="time_range_label">Period:</string>
+
+    <!-- Monitor service notification -->
+    <string name="monitor_notification_title">SecuDash is active</string>
+    <string name="monitor_notification_text">Monitoring app usage and device protection.</string>
+    <string name="monitor_channel_name">SecuDash Monitor</string>
+    <string name="monitor_channel_description">Keeps SecuDash running in the background to monitor app usage and maintain device protection.</string>
+
+    <!-- Time range spinner -->
+    <string-array name="time_range_options">
+        <item>Today</item>
+        <item>Last 7 days</item>
+        <item>Last 30 days</item>
+    </string-array>
+</resources>
