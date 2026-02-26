@@ -63,8 +63,6 @@ class MonitorService : Service() {
     override fun onDestroy() {
         handler.removeCallbacks(checkRunnable)
         super.onDestroy()
-        // Restart immediately if destroyed unexpectedly
-        start(applicationContext)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

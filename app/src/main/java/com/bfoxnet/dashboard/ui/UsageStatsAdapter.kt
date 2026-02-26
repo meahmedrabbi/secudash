@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bfoxnet.dashboard.R
 import com.bfoxnet.dashboard.utils.UsageStatsHelper
@@ -13,6 +14,7 @@ import java.util.Locale
 
 /**
  * [RecyclerView.Adapter] that displays per-app usage statistics in the dashboard.
+ * Uses [DiffUtil] for efficient, targeted updates instead of a full rebind.
  */
 class UsageStatsAdapter(
     private var items: List<UsageStatsHelper.AppUsage> = emptyList()
@@ -27,8 +29,16 @@ class UsageStatsAdapter(
     }
 
     fun updateData(newItems: List<UsageStatsHelper.AppUsage>) {
+        val diff = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+            override fun getOldListSize() = items.size
+            override fun getNewListSize() = newItems.size
+            override fun areItemsTheSame(oldPos: Int, newPos: Int) =
+                items[oldPos].packageName == newItems[newPos].packageName
+            override fun areContentsTheSame(oldPos: Int, newPos: Int) =
+                items[oldPos] == newItems[newPos]
+        })
         items = newItems
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

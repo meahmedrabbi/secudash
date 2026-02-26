@@ -7,12 +7,16 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bfoxnet.dashboard.services.MonitorService
 import com.bfoxnet.dashboard.ui.UsageStatsAdapter
 import com.bfoxnet.dashboard.utils.UsageStatsHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Main dashboard that shows per-app usage statistics.
@@ -72,19 +76,18 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun loadUsageStats(days: Int) {
-        // Run on background thread to avoid ANR
-        Thread {
-            val stats = UsageStatsHelper.getUsageStats(this, days)
-            runOnUiThread {
-                if (stats.isEmpty()) {
-                    tvEmptyState.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                } else {
-                    tvEmptyState.visibility = View.GONE
-                    recyclerView.visibility = View.VISIBLE
-                    adapter.updateData(stats)
-                }
+        lifecycleScope.launch {
+            val stats = withContext(Dispatchers.IO) {
+                UsageStatsHelper.getUsageStats(this@DashboardActivity, days)
             }
-        }.start()
+            if (stats.isEmpty()) {
+                tvEmptyState.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                tvEmptyState.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+                adapter.updateData(stats)
+            }
+        }
     }
 }
